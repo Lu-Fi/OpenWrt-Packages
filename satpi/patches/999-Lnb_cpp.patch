@@ -1,0 +1,28 @@
+--- a/src/input/dvb/delivery/Lnb.cpp	2018-03-09 20:21:17.000000000 +0100
++++ b/src/input/dvb/delivery/Lnb.cpp	2018-05-20 08:34:06.373931220 +0200
+@@ -21,6 +21,7 @@
+ 
+ #include <Log.h>
+ #include <StringConverter.h>
++#include <math.h>
+ 
+ namespace input {
+ namespace dvb {
+@@ -92,14 +93,14 @@
+ 				if (freq >= _switchlof) {
+ 					hiband = true;
+ 				}
+-				ifreq = abs(freq - (hiband ? _lofHigh : _lofLow));
++				ifreq = fabs(freq - (hiband ? _lofHigh : _lofLow));
+ 			} else {
+ 				// C-Band Multi-point LNB
+-				ifreq = abs(freq - (verticalPolarization ? _lofLow : _lofHigh));
++				ifreq = fabs(freq - (verticalPolarization ? _lofLow : _lofHigh));
+ 			}
+ 		} else {
+ 			// Mono-point LNB without switch
+-			ifreq = abs(freq - _lofLow);
++			ifreq = fabs(freq - _lofLow);
+ 		}
+ 		freq = ifreq;
+ 	}
